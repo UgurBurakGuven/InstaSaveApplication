@@ -20,6 +20,7 @@ class PopUpViewController: UIViewController {
     @IBOutlet weak var usernameTextField: UITextField!
     @IBOutlet weak var captionTextField: UITextField!
     
+    var uuid : String?
     var selectedImage : UIImage?
     
     override func viewDidLoad() {
@@ -55,10 +56,13 @@ class PopUpViewController: UIViewController {
     }
     func uploadImage(image: UIImage){
         let data = NSData(data: image.jpegData(compressionQuality: 0.9)!)
+        uuid = NSUUID().uuidString
 
         let userData = UserData()
         userData.image = data
         userData.name = usernameTextField.text
+        userData.id = uuid
+        
         if captionTextField.hasText {
             userData.caption = captionTextField.text
         }else {
@@ -102,6 +106,7 @@ class PopUpViewController: UIViewController {
                 let vc = self.storyboard!.instantiateViewController(withIdentifier: "RepostViewController") as! RepostViewController
                 vc.selectedImageView = selectedImage
                 vc.selectedName = usernameTextField.text
+                vc.selectedId = uuid
                 
                 if captionTextField.hasText {
                     vc.selectedCaption = captionTextField.text

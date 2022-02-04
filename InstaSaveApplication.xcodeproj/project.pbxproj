@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3AA0BDC027AA94A9003FBC77 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA0BDBF27AA94A9003FBC77 /* DetailViewController.swift */; };
 		3AA0BDC427AA9866003FBC77 /* MyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA0BDC227AA9866003FBC77 /* MyCollectionViewCell.swift */; };
 		3AA0BDC727AB1836003FBC77 /* PopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA0BDC627AB1835003FBC77 /* PopUpViewController.swift */; };
 		3AA0BDCA27AB214A003FBC77 /* RealmData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AA0BDC927AB214A003FBC77 /* RealmData.swift */; };
@@ -48,7 +47,6 @@
 /* Begin PBXFileReference section */
 		15B31CE5C3A4040D6B68554B /* Pods_InstaSaveApplication.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InstaSaveApplication.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		37A213CA14188B1D74A148E0 /* Pods_InstaSaveApplicationTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_InstaSaveApplicationTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		3AA0BDBF27AA94A9003FBC77 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		3AA0BDC227AA9866003FBC77 /* MyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyCollectionViewCell.swift; sourceTree = "<group>"; };
 		3AA0BDC627AB1835003FBC77 /* PopUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopUpViewController.swift; sourceTree = "<group>"; };
 		3AA0BDC927AB214A003FBC77 /* RealmData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RealmData.swift; sourceTree = "<group>"; };
@@ -109,7 +107,6 @@
 			isa = PBXGroup;
 			children = (
 				3AA5E81F27A9A4410090847D /* InstaSaveViewController.swift */,
-				3AA0BDBF27AA94A9003FBC77 /* DetailViewController.swift */,
 				3AA0BDC627AB1835003FBC77 /* PopUpViewController.swift */,
 				3AF0C77127ABE45300219531 /* RepostViewController.swift */,
 			);
@@ -491,7 +488,6 @@
 				3AA5E81C27A9A4410090847D /* AppDelegate.swift in Sources */,
 				3AA0BDC427AA9866003FBC77 /* MyCollectionViewCell.swift in Sources */,
 				3AA0BDCA27AB214A003FBC77 /* RealmData.swift in Sources */,
-				3AA0BDC027AA94A9003FBC77 /* DetailViewController.swift in Sources */,
 				3AA5E81E27A9A4410090847D /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

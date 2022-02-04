@@ -6,9 +6,13 @@
 //
 
 import UIKit
+import RealmSwift
 
 class RepostViewController: UIViewController {
+    let realm = try! Realm()
+    
     @IBOutlet weak var titleNameLabel: UILabel!
+    @IBOutlet weak var optionButton: UIButton!
     
     @IBOutlet weak var myLeftViewNameLabel: UILabel!
     @IBOutlet weak var myRightViewNameLabel: UILabel!
@@ -39,12 +43,15 @@ class RepostViewController: UIViewController {
     var selectedName: String?
     var selectedImageView : UIImage?
     var selectedCaption : String?
+    var selectedId : String?
     var newImageView : UIImage?
+    
     
     var selectedColor : UIColor?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+ 
         repostImageView.image = selectedImageView
         titleNameLabel.text = selectedName
         colorPickerImage.isUserInteractionEnabled = true
@@ -59,9 +66,6 @@ class RepostViewController: UIViewController {
         typeActivity()
         buttonActivity()
 
-    }
-    @objc func goBack(){
-        print("hello")
     }
    
     func setViewCorner(){
@@ -100,12 +104,12 @@ class RepostViewController: UIViewController {
             myRightView.backgroundColor = UIColor.black
             darkButton.backgroundColor = UIColor.white
             
-          
+            if selectedColor == nil {
                 myLeftViewNameLabel.textColor = UIColor.white
                 myRightViewNameLabel.textColor = UIColor.white
                 myTopRightViewNameLabel.textColor = UIColor.white
                 myTopViewNameLabel.textColor = UIColor.white
-            
+            }
             
         }
     }
@@ -223,6 +227,29 @@ class RepostViewController: UIViewController {
         
         return saveImage(image: image)
     }
+    func saveImage(image: UIImage) -> UIImage? {
+        let bottomImage = repostImageView
+        let topImage = image
+        let newSize = CGSize(width: repostImageView.frame.width, height: repostImageView.frame.height)
+      
+        UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0)
+        bottomImage?.draw(CGRect(origin: CGPoint.zero, size: newSize))
+        
+        if selectedButtonIndex == 1 {
+            topImage.draw(in: CGRect(x: 0, y: repostImageView.frame.height - 23 , width: 150, height: 23))
+        }else if selectedButtonIndex == 2{
+            topImage.draw(in: CGRect(x: repostImageView.frame.width - 150, y: repostImageView.frame.height - 23 , width: 150, height: 23))
+        }else if selectedButtonIndex == 3 {
+            topImage.draw(in: CGRect(x: 0, y: 0, width: 150, height: 23))
+        }else if selectedButtonIndex == 4 {
+            topImage.draw(in: CGRect(x: repostImageView.frame.width - 150 , y: 0, width: 150, height: 23))
+        }
+
+        let newImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return newImage
+     
+    }
    
     @IBAction func leftButtonClicked(_ sender: Any) {
         selectedButtonIndex = 1
@@ -257,29 +284,7 @@ class RepostViewController: UIViewController {
         typeActivity()
     }
    
-    func saveImage(image: UIImage) -> UIImage? {
-        let bottomImage = repostImageView
-        let topImage = image
-        let newSize = CGSize(width: repostImageView.frame.width, height: repostImageView.frame.height)
-      
-        UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0)
-        bottomImage?.draw(CGRect(origin: CGPoint.zero, size: newSize))
-        
-        if selectedButtonIndex == 1 {
-            topImage.draw(in: CGRect(x: 0, y: repostImageView.frame.height - 23 , width: 150, height: 23))
-        }else if selectedButtonIndex == 2{
-            topImage.draw(in: CGRect(x: repostImageView.frame.width - 150, y: repostImageView.frame.height - 23 , width: 150, height: 23))
-        }else if selectedButtonIndex == 3 {
-            topImage.draw(in: CGRect(x: 0, y: 0, width: 150, height: 23))
-        }else if selectedButtonIndex == 4 {
-            topImage.draw(in: CGRect(x: repostImageView.frame.width - 150 , y: 0, width: 150, height: 23))
-        }
-
-        let newImage = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-        return newImage
-     
-    }
+  
     @IBAction func goBackButtonClicked(_ sender: Any) {
         let vc = self.storyboard!.instantiateViewController(withIdentifier: "InstaSaveViewController") as! InstaSaveViewController
         self.present(vc, animated: true, completion: nil)
@@ -292,6 +297,46 @@ class RepostViewController: UIViewController {
         
     }
     @IBAction func optionButtonClicked(_ sender: Any) {
+        let menu = UIMenu(title: "", children: [
+            UIAction(title: "Open Instagram", image: UIImage(systemName: "arrowshape.turn.up.right"),handler: { _ in
+                let Username =  self.selectedName
+                if Username != nil {
+                    let trimmedString = Username!.trimmingCharacters(in: .whitespaces)
+                    let appURL = URL(string: "instagram://user?username=\(trimmedString)")!
+                    let application = UIApplication.shared
+
+                    if application.canOpenURL(appURL) {
+                        application.open(appURL)
+                    } else {
+                 
+                        let webURL = URL(string: "https://instagram.com/\(trimmedString)")!
+                        application.open(webURL)
+                    }
+                }
+                 
+            }),
+            UIAction(title: "Share", image: UIImage(systemName: "square.and.arrow.up"),handler: {_ in
+                let image = self.clipPhoto()
+                let imageToShare = [ image! ]
+                let activityViewController = UIActivityViewController(activityItems: imageToShare, applicationActivities: nil)
+                activityViewController.popoverPresentationController?.sourceView = self.view
+                      
+                self.present(activityViewController, animated: true, completion: nil)
+            }),
+            UIAction(title: "Delete", image: UIImage(systemName: "trash"),handler: { _ in
+                if let selectedId = self.selectedId {
+                    let results = self.realm.objects(UserData.self).filter("id='\(selectedId)'")
+                    try! self.realm.write({
+                        self.realm.delete(results)
+                    })
+                    let vc = self.storyboard!.instantiateViewController(withIdentifier: "InstaSaveViewController") as! InstaSaveViewController
+                    self.present(vc, animated: true, completion: nil)
+                }
+               
+            })
+            ])
+        optionButton.menu = menu
+        optionButton.showsMenuAsPrimaryAction = true
     }
     
     

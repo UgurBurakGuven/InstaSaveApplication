@@ -9,6 +9,7 @@ import Foundation
 import RealmSwift
 
 class UserData : Object, Identifiable {
+    @objc dynamic var id : String?
     @objc dynamic var image : NSData?
     @objc dynamic var name : String?
     @objc dynamic var caption : String?

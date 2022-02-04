@@ -114,14 +114,21 @@ extension InstaSaveViewController : UICollectionViewDataSource {
         return cell
     }
     
-  
-    
-    
 }
 extension InstaSaveViewController : UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         collectionView.deselectItem(at: indexPath, animated: true)
-        print("You Tapped me", indexPath)
+        let vc = self.storyboard!.instantiateViewController(withIdentifier: "RepostViewController") as! RepostViewController
+        vc.selectedName = realmArray?[indexPath.row].name
+        vc.selectedCaption = realmArray?[indexPath.row].caption
+        vc.selectedId = realmArray?[indexPath.row].id
+        if let imageData = realmArray?[indexPath.row].image{
+            let image : UIImage = UIImage(data: imageData as Data)!
+            vc.selectedImageView = image
+        }
+  
+   
+        self.present(vc, animated: true, completion: nil)
     }
     
 }
@@ -163,6 +170,20 @@ extension InstaSaveViewController : UITableViewDelegate, UITableViewDataSource {
             return cell
         }
         return UITableViewCell()
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let vc = self.storyboard!.instantiateViewController(withIdentifier: "RepostViewController") as! RepostViewController
+        vc.selectedName = realmArray?[indexPath.row].name
+        vc.selectedCaption = realmArray?[indexPath.row].caption
+        vc.selectedId = realmArray?[indexPath.row].id
+        if let imageData = realmArray?[indexPath.row].image{
+            let image : UIImage = UIImage(data: imageData as Data)!
+            vc.selectedImageView = image
+        }
+  
+   
+        self.present(vc, animated: true, completion: nil)
     }
     
     
