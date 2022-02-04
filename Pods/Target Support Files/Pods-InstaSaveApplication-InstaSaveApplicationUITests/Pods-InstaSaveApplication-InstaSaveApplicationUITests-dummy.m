@@ -1,0 +1,5 @@
+#import <Foundation/Foundation.h>
+@interface PodsDummy_Pods_InstaSaveApplication_InstaSaveApplicationUITests : NSObject
+@end
+@implementation PodsDummy_Pods_InstaSaveApplication_InstaSaveApplicationUITests
+@end
