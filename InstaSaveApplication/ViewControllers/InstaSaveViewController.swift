@@ -98,6 +98,10 @@ class InstaSaveViewController: UIViewController {
         let vc = self.storyboard!.instantiateViewController(withIdentifier: "AllCollectionViewController") as! AllCollectionViewController
         self.present(vc, animated: true, completion: nil)
     }
+    @IBAction func viewAllButtonClicked(_ sender: Any) {
+        let vc = self.storyboard!.instantiateViewController(withIdentifier: "AllCollectionViewController") as! AllCollectionViewController
+        self.present(vc, animated: true, completion: nil)
+    }
 }
 
 //MARK: - UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewFlowLayoutInvalidationContext, UICollectionViewDelegate
