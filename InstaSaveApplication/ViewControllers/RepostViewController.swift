@@ -7,10 +7,13 @@
 
 import UIKit
 import RealmSwift
+import CopyableLabel
 
 class RepostViewController: UIViewController {
     let realm = try! Realm()
     
+    @IBOutlet weak var captionLabelSaveButton: UIButton!
+    @IBOutlet weak var captionLabel: UILabel!
     @IBOutlet weak var titleNameLabel: UILabel!
     @IBOutlet weak var optionButton: UIButton!
     
@@ -20,7 +23,6 @@ class RepostViewController: UIViewController {
     @IBOutlet weak var myTopViewNameLabel: UILabel!
     
     @IBOutlet weak var spaceButton: UIButton!
-    @IBOutlet weak var atButton: UIButton!
     @IBOutlet weak var topRightButton: UIButton!
     @IBOutlet weak var topButton: UIButton!
     @IBOutlet weak var leftButton: UIButton!
@@ -52,8 +54,20 @@ class RepostViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
  
+        
         repostImageView.image = selectedImageView
         titleNameLabel.text = selectedName
+        
+        if selectedCaption == "" {
+            captionLabel.text = "No Caption Available"
+            captionLabelSaveButton.isHidden = true
+        } else {
+            captionLabel.text = selectedCaption
+            captionLabelSaveButton.isHidden = false
+        }
+        NotificationCenter.default.addObserver(self, selector: #selector(receivedCopyableLabelNotification(_:)), name: CopyableLabel.didShowCopyMenuNotification, object: nil)
+        captionLabel.copyable = true
+        
         colorPickerImage.isUserInteractionEnabled = true
         let gestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(openColorPicker))
         colorPickerImage.addGestureRecognizer(gestureRecognizer)
@@ -66,6 +80,11 @@ class RepostViewController: UIViewController {
         typeActivity()
         buttonActivity()
 
+    }
+    @objc func receivedCopyableLabelNotification(_ notification: NSNotification) {
+        if let label = notification.object as? UILabel {
+            print(label.text!)
+        }
     }
    
     func setViewCorner(){
@@ -159,14 +178,7 @@ class RepostViewController: UIViewController {
             topRightButton.backgroundColor = nil
             myTopRightView.isHidden = true
         }
-        if selectedButtonIndex == 5 {
-            atButton.backgroundColor = UIColor.white
-            myLeftView.isHidden = false
-        }else {
-            atButton.backgroundColor = nil
-           // myLeftView.isHidden = true
-        }
-         if selectedButtonIndex == 6 {
+         if selectedButtonIndex == 5 {
             spaceButton.backgroundColor = UIColor.white
             myLeftView.isHidden = true
              myTopView.isHidden = true
@@ -296,6 +308,11 @@ class RepostViewController: UIViewController {
         }
         
     }
+    @IBAction func captionLabelSaveButtonClicked(_ sender: Any) {
+        UIPasteboard.general.string = selectedCaption
+    }
+    
+    
     @IBAction func optionButtonClicked(_ sender: Any) {
         //Contextual Menu
         let menu = UIMenu(title: "", children: [

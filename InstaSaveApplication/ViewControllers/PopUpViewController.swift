@@ -29,6 +29,8 @@ class PopUpViewController: UIViewController {
         popUpView.clipsToBounds = true
         closeButton.layer.cornerRadius = 16
         closeButton.clipsToBounds = true
+        self.usernameTextField.delegate = self
+        self.captionTextField.delegate = self
         self.view.backgroundColor = UIColor.black.withAlphaComponent(0.8)
  
         detailImageView.image = selectedImage
@@ -68,7 +70,11 @@ class PopUpViewController: UIViewController {
         }else {
             userData.caption = ""
         }
-        
+        let date = Date()
+        let df = DateFormatter()
+        df.dateFormat = "dd.MM.yyyy"
+        let dateString = df.string(from: date)
+        userData.date = dateString
         let realm = try! Realm()
         
         try! realm.write {
@@ -134,4 +140,13 @@ class PopUpViewController: UIViewController {
     }
 
 
+}
+
+
+//MARK: - UITextFieldDelegate
+extension PopUpViewController : UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
+        return false
+    }
 }

@@ -13,4 +13,5 @@ class UserData : Object, Identifiable {
     @objc dynamic var image : NSData?
     @objc dynamic var name : String?
     @objc dynamic var caption : String?
+    @objc dynamic var date : String?
 }

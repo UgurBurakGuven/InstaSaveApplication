@@ -166,6 +166,7 @@ extension InstaSaveViewController : UITableViewDelegate, UITableViewDataSource {
                 } else {
                     cell.tableViewCaptionLabel.text = ""
                 }
+                cell.tableViewDateLabel.text = realmArray?[indexPath.row].date
             }
             return cell
         }

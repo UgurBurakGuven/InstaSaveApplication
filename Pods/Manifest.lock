@@ -1,4 +1,5 @@
 PODS:
+  - CopyableLabel (4.2.0)
   - Realm (10.22.0):
     - Realm/Headers (= 10.22.0)
   - Realm/Headers (10.22.0)
@@ -6,17 +7,20 @@ PODS:
     - Realm (= 10.22.0)
 
 DEPENDENCIES:
+  - CopyableLabel
   - RealmSwift
 
 SPEC REPOS:
   trunk:
+    - CopyableLabel
     - Realm
     - RealmSwift
 
 SPEC CHECKSUMS:
+  CopyableLabel: ef505baa8e2a5b85b615bd41b03f393e73922ca5
   Realm: d9e4e5877095a6722145811f56fe89a531c9659d
   RealmSwift: e4191b4b957fcfcbed23751ec65eec98f8173ab5
 
-PODFILE CHECKSUM: 0da84bb330ef89a8e67466705c653bcbfffaa0dc
+PODFILE CHECKSUM: c0df0aa80a4cf6c797bc20dc9593b43298a320d3
 
 COCOAPODS: 1.11.2
