@@ -10,6 +10,7 @@ import RealmSwift
 
 class InstaSaveViewController: UIViewController {
     
+    @IBOutlet weak var openAllImageButton: UIButton!
     @IBOutlet weak var openInstagramButton: UIButton!
     @IBOutlet weak var selectPicsButton: UIButton!
     @IBOutlet weak var instaTableView: UITableView!
@@ -52,16 +53,14 @@ class InstaSaveViewController: UIViewController {
         layout.itemSize = CGSize(width: 80, height: 80)
         layout.sectionInset = UIEdgeInsets(top: 0, left: 10, bottom: 0, right: 0)
         
-        
-        
         collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        
-        collectionView?.register(MyCollectionViewCell.self, forCellWithReuseIdentifier: MyCollectionViewCell.identifier)
-        
+        collectionView?.register(MainMenuCollectionViewCell.self, forCellWithReuseIdentifier: MainMenuCollectionViewCell.identifier)
         collectionView?.showsHorizontalScrollIndicator = false
+        
         guard let myCollection = collectionView else {
             return
         }
+        
         view.addSubview(myCollection)
     }
     
@@ -95,6 +94,10 @@ class InstaSaveViewController: UIViewController {
         present(pickerController, animated: true, completion: nil)
         
     }
+    @IBAction func openAllImageButtonClicked(_ sender: Any) {
+        let vc = self.storyboard!.instantiateViewController(withIdentifier: "AllCollectionViewController") as! AllCollectionViewController
+        self.present(vc, animated: true, completion: nil)
+    }
 }
 
 //MARK: - UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewFlowLayoutInvalidationContext, UICollectionViewDelegate
@@ -105,12 +108,11 @@ extension InstaSaveViewController : UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyCollectionViewCell.identifier, for: indexPath) as! MyCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MainMenuCollectionViewCell.identifier, for: indexPath) as! MainMenuCollectionViewCell
         if let imageData = realmArray?[indexPath.row].image{
             let image : UIImage = UIImage(data: imageData as Data)!
             cell.configure(with: image)
         }
-  
         return cell
     }
     
@@ -126,8 +128,6 @@ extension InstaSaveViewController : UICollectionViewDelegate {
             let image : UIImage = UIImage(data: imageData as Data)!
             vc.selectedImageView = image
         }
-  
-   
         self.present(vc, animated: true, completion: nil)
     }
     

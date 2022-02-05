@@ -57,6 +57,9 @@
                                 <color key="tintColor" systemColor="secondaryLabelColor"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="arrowshape.turn.up.right.fill" catalog="system"/>
+                                <connections>
+                                    <action selector="openAllImageButtonClicked:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WBU-cV-00c"/>
+                                </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="aee-t7-VWx">
                                 <rect key="frame" x="0.0" y="434" width="414" height="323"/>
@@ -84,15 +87,17 @@
                             <constraint firstItem="KxK-kX-BXE" firstAttribute="leading" secondItem="TgK-Rs-m9n" secondAttribute="leading" id="rkc-zv-vnz"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="z5b-Cr-HSf"/>
                     <connections>
                         <outlet property="instaTableView" destination="aee-t7-VWx" id="uxS-DG-rJY"/>
+                        <outlet property="openAllImageButton" destination="XTv-8s-PRS" id="pLt-lm-WvK"/>
                         <outlet property="openInstagramButton" destination="KxK-kX-BXE" id="Evq-bo-K6S"/>
                         <outlet property="selectPicsButton" destination="TgK-Rs-m9n" id="6Xv-Wh-fkP"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="28.985507246376812" y="65.625"/>
+            <point key="canvasLocation" x="1841" y="66"/>
         </scene>
         <!--Pop Up View Controller-->
         <scene sceneID="zPS-WO-4f8">
@@ -205,7 +210,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gDF-OW-GZY" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
                 <screenEdgePanGestureRecognizer minimumNumberOfTouches="1" id="3X9-n8-CMf"/>
             </objects>
-            <point key="canvasLocation" x="838" y="66"/>
+            <point key="canvasLocation" x="3284.057971014493" y="65.625"/>
         </scene>
         <!--Repost View Controller-->
         <scene sceneID="dgj-Pg-pbG">
@@ -641,7 +646,42 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7nS-Ex-WAc" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1639" y="66"/>
+            <point key="canvasLocation" x="4007.2463768115945" y="65.625"/>
+        </scene>
+        <!--All Collection View Controller-->
+        <scene sceneID="M9p-F1-E57">
+            <objects>
+                <viewController storyboardIdentifier="AllCollectionViewController" modalPresentationStyle="fullScreen" id="Qez-ME-vWC" customClass="AllCollectionViewController" customModule="InstaSaveApplication" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="KlN-sO-ui6">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RVi-jH-B3O">
+                                <rect key="frame" x="20" y="44" width="108" height="31"/>
+                                <color key="tintColor" systemColor="labelColor"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="chevron.backward" catalog="system" title="back"/>
+                                <connections>
+                                    <action selector="backButtonClicked:" destination="Qez-ME-vWC" eventType="touchUpInside" id="350-yi-DaW"/>
+                                    <action selector="goBackButtonClicked:" destination="sQs-hR-ogX" eventType="touchUpInside" id="feW-Og-3jW"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="MMz-jL-JPK"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="RVi-jH-B3O" firstAttribute="top" secondItem="MMz-jL-JPK" secondAttribute="top" id="Flo-jK-ofG"/>
+                            <constraint firstItem="RVi-jH-B3O" firstAttribute="leading" secondItem="KlN-sO-ui6" secondAttribute="leadingMargin" id="ems-kM-d6Q"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="kVD-wx-lgn"/>
+                    <connections>
+                        <outlet property="backButton" destination="RVi-jH-B3O" id="Ehu-KI-cId"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3Zm-er-1so" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2565.217391304348" y="65.625"/>
         </scene>
     </scenes>
     <resources>
